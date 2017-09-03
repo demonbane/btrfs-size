@@ -28,7 +28,7 @@ COL2=$(echo "$COL2" | cut -c 2-)
 function convert()
 { 
         OUT=`echo "$i" | awk '{ sum=$1 ; hum[1024^4]="TiB";hum[1024^3]="GiB";hum[1024^2]="MiB";hum[1024]="KiB"; for (x=1024^4; x>=1024; x/=1024){ if (sum>=x) { printf "%.2f%s\n",sum/x,hum[x];break } }}'`
-        OUTPUT=$(printf "%-9s" $OUT) 
+        OUTPUT=$(printf "%-10s" $OUT)
         echo "$OUTPUT"
 }
 
@@ -64,7 +64,7 @@ done
 printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' =
 printf "%-67s" "Snapshot / Subvolume"
 printf "%-5s" "ID"
-printf "%-9s" "Total"
+printf "%-10s" "Total"
 printf "Exclusive Data"
 printf "\n"
 printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' =
@@ -87,6 +87,6 @@ done
 if [ $ECL_TOTAL -gt "1" ]; then
     printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' =
     i=$ECL_TOTAL
-    printf "%-64s" " "  
+    printf "%-65s" " "
     printf "Exclusive Total: $(convert $i) \n"
 fi
